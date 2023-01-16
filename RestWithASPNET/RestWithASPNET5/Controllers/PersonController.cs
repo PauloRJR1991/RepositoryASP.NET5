@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace RestWithASPNET5.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
@@ -38,7 +38,7 @@ namespace RestWithASPNET5.Controllers
             return Ok(person);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost]
         public IActionResult Post([FromBody] Person person)
         {
             if (person == null)
