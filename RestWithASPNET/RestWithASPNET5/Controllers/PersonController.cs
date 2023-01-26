@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestWithASPNET5.Model;
-using RestWithASPNET5.Services;
+using RestWithASPNET5.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,28 +9,29 @@ using System.Threading.Tasks;
 
 namespace RestWithASPNET5.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v{Version:apiversion}")]
     public class PersonController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
-        private IPersonService _ipersonservice;
-        public PersonController(ILogger<PersonController> logger, IPersonService personservice)
+        private IPersonBusiness _ipersonbusiness;
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personservice)
         {
-            _ipersonservice = personservice;
+            _ipersonbusiness = personservice;
             _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_ipersonservice.FindAll());
+            return Ok(_ipersonbusiness.FindAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var person = _ipersonservice.FindByID(id);
+            var person = _ipersonbusiness.FindByID(id);
             if (person == null)
             {
                 return NotFound();
@@ -45,7 +46,7 @@ namespace RestWithASPNET5.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_ipersonservice.Create(person));
+            return Ok(_ipersonbusiness.Create(person));
         }
 
         [HttpPut]
@@ -55,13 +56,13 @@ namespace RestWithASPNET5.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_ipersonservice.Update(person));
+            return Ok(_ipersonbusiness.Update(person));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _ipersonservice.Delete(id);
+            _ipersonbusiness.Delete(id);
 
             return NoContent();
         }
