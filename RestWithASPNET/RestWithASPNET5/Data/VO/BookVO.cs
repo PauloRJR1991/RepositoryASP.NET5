@@ -5,22 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestWithASPNET5.Model
+namespace RestWithASPNET5.Data.VO
 {
     [Table("books")]
-    public class Book : BaseEntity
+    public class BookVO 
     {
-
-        [Column("author")]
+        public long id { get; set; }
         public string Author { get; set; }
         
-        [Column("launch_date")]
         public DateTime Launch_date { get; set; }
         
-        [Column("price")]
         public decimal Price { get; set; }
         
-        [Column("title")] 
         public string Title { get; set; }
     }
 }

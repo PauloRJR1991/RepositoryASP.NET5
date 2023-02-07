@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RestWithASPNET5.Data.VO;
 
 namespace RestWithASPNET5.Controllers
 {
@@ -40,7 +41,7 @@ namespace RestWithASPNET5.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null)
             {
@@ -50,7 +51,7 @@ namespace RestWithASPNET5.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null)
             {

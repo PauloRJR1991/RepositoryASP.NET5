@@ -1,9 +1,5 @@
-﻿using RestWithASPNET5.Model;
-using RestWithASPNET5.Model.Base;
-using System;
+﻿using RestWithASPNET5.Model.Base;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestWithASPNET5.Repository
 {
@@ -14,7 +10,6 @@ namespace RestWithASPNET5.Repository
         List<T> FindAll();
         T Update(T item);
         void Delete(long id);
-
         bool Exists(long id);
     }
 }

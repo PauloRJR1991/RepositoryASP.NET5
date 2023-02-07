@@ -1,4 +1,6 @@
-﻿using RestWithASPNET5.Model;
+﻿using RestWithASPNET5.Data.Converter.Implementation;
+using RestWithASPNET5.Data.VO;
+using RestWithASPNET5.Model;
 using RestWithASPNET5.Model.Context;
 using RestWithASPNET5.Repository;
 using System;
@@ -11,37 +13,46 @@ namespace RestWithASPNET5.Business.Implementation
 {
     public class BookBusinessImplementation : IBookBusiness
     {
-        private readonly IBookRepository _repository;
+        private readonly IRepository<Book> _repository;
+        private readonly BookConverter _converter;
 
-        public BookBusinessImplementation(IBookRepository repository)
+
+        public BookBusinessImplementation(IRepository<Book> repository)
         {
             _repository = repository;
+            _converter = new BookConverter();
         }
 
-        public List<Book> FindAll()
+        public List<BookVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.Parser(_repository.FindAll());
         }
 
-        public Book FindByID(long id)
+        public BookVO FindByID(long id)
         {
-            return _repository.FindByID(id);
+            return _converter.Parser(_repository.FindByID(id));
         }
 
-        public Book Create(Book book)
+        public BookVO Create(BookVO book)
         {
-            return _repository.Create(book);
+            var bookEntity = _converter.Parser(book);
+            bookEntity = _repository.Create(bookEntity);
+            return _converter.Parser(bookEntity);
         }
 
-        public Book Update(Book book)
+        public BookVO Update(BookVO book)
         {
 
-            return _repository.Update(book);
+            var bookEntity = _converter.Parser(book);
+            bookEntity = _repository.Update(bookEntity);
+            return _converter.Parser(bookEntity);
         }
 
         public void Delete(long id)
         {
             _repository.Delete(id);
         }
+
+
     }
 }

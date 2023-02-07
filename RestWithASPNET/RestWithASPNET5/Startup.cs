@@ -16,8 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RestWithASPNET5.Repository;
-using RestWithASPNET5.Repository.Implementation;
 using Serilog;
+using RestWithASPNET5.Repository.Generic;
 
 namespace RestWithASPNET5
 {
@@ -58,11 +58,11 @@ namespace RestWithASPNET5
 
             //Injeção de dependencia
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
+           // services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 
             //Injeção de dependencia
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+            services.AddScoped(typeof(IRepository<>),typeof(GenericRepository<>));
         }
 
         private void MigrateDatabase(string connection)

@@ -4,7 +4,6 @@ using RestWithASPNET5.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestWithASPNET5.Repository.Generic
 {
@@ -55,7 +54,6 @@ namespace RestWithASPNET5.Repository.Generic
                 }
             }
         }
-
 
         public bool Exists(long id)
         {

@@ -1,4 +1,5 @@
-﻿using RestWithASPNET5.Model;
+﻿using RestWithASPNET5.Data.VO;
+using RestWithASPNET5.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace RestWithASPNET5.Business
 {
     public interface IPersonBusiness
     {
-        Person Create(Person person);
-        Person FindByID(long id);
-        List<Person> FindAll();
-        Person Update(Person person);
+        PersonVO Create(PersonVO person);
+        PersonVO FindByID(long id);
+        List<PersonVO> FindAll();
+        PersonVO Update(PersonVO person);
         void Delete(long id);
     }
 }
